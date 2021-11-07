@@ -10,6 +10,12 @@ const bodyParser=require("body-parser");
 
 const cors = require('cors');
 
+// Routers
+const authRoute = require('./routes/authRoute');
+const postRoute = require('./routes/postRoute');
+
+
+
 // DB Connection
 mongoose.connect(process.env.MONGODB_URI)
     .then(()=>console.log("DB Connected"))
@@ -19,6 +25,9 @@ mongoose.connect(process.env.MONGODB_URI)
 app.use(bodyParser.json());
 app.use(cors());
 
-app.get('/',(req,res)=>res.send(process.env.Grting));
+
+// API
+app.use("/api",authRoute);
+app.use("/api",postRoute);
 
 app.listen(process.env.PORT,()=>console.log(`server running on port ${process.env.PORT}`));
