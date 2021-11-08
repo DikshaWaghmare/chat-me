@@ -66,7 +66,6 @@ var authSchema = new mongoose.Schema(
                 } catch (err){
                     return "";
                 }
-
         }
     };
 module.exports=mongoose.model('auth',authSchema);
