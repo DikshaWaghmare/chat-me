@@ -14,13 +14,10 @@ const cors = require('cors');
 const authRoute = require('./routes/authRoute');
 const postRoute = require('./routes/postRoute');
 
-const demoRoute = require('./routes/demoRoute');
-
-
 
 // DB Connection
 mongoose.connect(process.env.MONGODB_URI)
-    .then(()=>console.log("DB is Connected"))
+    .then(()=>console.log("DB is Connected successfully"))
     .catch((err)=>console.log('error is '+err));
 
 //Middlewares
@@ -29,8 +26,6 @@ app.use(cors());
 
 
 // API
-app.use("/api",authRoute);
-app.use("/api",postRoute);
-app.use("/api",demoRoute);
+app.use("/api",[authRoute,postRoute]);
 
 app.listen(process.env.PORT,()=>console.log(`server running on port ${process.env.PORT}`));

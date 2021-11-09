@@ -2,8 +2,8 @@ var express=require("express");
 
 var router=express.Router();
 
-router.get('/demo',(req,res)=>{
-    res.send("I'm from Post Router");
-})
+const {insertPost} = require('../controllers/postController');
+
+router.post("/insert",insertPost);
 
 module.exports=router;
