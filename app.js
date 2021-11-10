@@ -24,7 +24,6 @@ mongoose.connect(process.env.MONGODB_URI)
 app.use(bodyParser.json());
 app.use(cors());
 
-
 // API
 app.use("/api",[authRoute,postRoute]);
 

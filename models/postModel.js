@@ -23,6 +23,11 @@ const postSchema = new mongoose.Schema({
         type:Array,
         default:[],
         trim:true
+    },
+    postBelongsTo:{
+        type:String,
+        required:true,
+        trim:true
     }
 },{
     timestamps:true
