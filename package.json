@@ -4,13 +4,15 @@
   "description": "\"this is made for october batch\"",
   "main": "app.js",
   "scripts": {
-    "start":"nodemon app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon app.js",
+    "client":"npm start --prefix client",
+    "dev" : "concurrently \"npm start\" \"npm run client\""
   },
   "author": "Ritesh Jangir",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.19.0",
+    "concurrently": "^6.3.0",
     "cors": "^2.8.5",
     "crypto": "^1.0.1",
     "dotenv": "^10.0.0",
