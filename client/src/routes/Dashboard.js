@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Logo from '../assets/img/logo.jpg'
 import axios from 'axios';
 
 export default class Dashboard extends Component {
@@ -30,10 +31,10 @@ export default class Dashboard extends Component {
         {
             myPosts = info.map((value,index) => {
                 return(
-                    <div className="card" style={{width: 18+"rem"}}>
+                    <div className="card w-100 mb-3">
                         {/* <img src="..." class="card-img-top" alt="..."> */}
                         <div className="card-body">
-                            <h5 className="card-title">{value.postTitle}</h5>
+                            <h5 className="card-title">{value.postCaption}</h5>
                             <p className="card-text">{value.postLocation}</p>
                         </div>
                     </div>
@@ -42,8 +43,23 @@ export default class Dashboard extends Component {
         }
 
         return (
-            <div>
-                {myPosts}
+            <div className="container pt-3">
+                <div className="row">
+                    {/* Post List */}
+                    <div className="col-md-8">
+                        {myPosts}
+                    </div>
+                    {/* Profile & folowers suggestions */}
+                    <div className="col-md-4">
+                        <div className="d-flex align-items-center">
+                            <img src={Logo} className="rounded-circle logo me-2" alt="..."/>
+                            <div>
+                                <p className='m-0'><b>Username</b></p>
+                                <p className='m-0'>First Last</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         )
     }

@@ -1,7 +1,10 @@
 const mongoose = require('mongoose');
 
 const postSchema = new mongoose.Schema({
-    postTitle:{
+    postPicture:{
+        type:String
+    },
+    postCaption:{
         type:String,
         trim:true,
         required:true
@@ -27,7 +30,8 @@ const postSchema = new mongoose.Schema({
     postBelongsTo:{
         type:String,
         required:true,
-        trim:true
+        trim:true,
+        default:'mrriteshjangir@gmail.com'
     }
 },{
     timestamps:true

@@ -9,7 +9,7 @@ exports.insertPost=(req,res)=>{
 }
 
 exports.readPost=(req,res)=>{
-    Post.find()
+    Post.find().sort({createdAt:-1})
         .then((data)=>res.status(200).json(data))
         .catch((err)=>res.status(400).json({Err:"Error Found i.e. "+err}))
 }
