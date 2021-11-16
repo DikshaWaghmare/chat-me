@@ -25,7 +25,7 @@ export default class Dashboard extends Component {
         let myPosts;
         var info = this.state.userInfo;
         if(!info){
-            myPosts="Data Not Found";
+            myPosts="<h2 className='text-danger'>Data Not Found</h2>";
         }
         else
         {
