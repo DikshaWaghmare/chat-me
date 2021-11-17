@@ -1,9 +1,18 @@
 const Post = require('../models/postModel');
 
 exports.insertPost=(req,res)=>{
-    const postObj = new Post(req.body);
+    const{postCaption,postLocation} = req.body;
+    const postPicture = req.file.filename;
 
-    postObj.save()
+    const pkg = {
+        postPicture,
+        postCaption,
+        postLocation,
+    };
+
+    const obj = new Post(pkg);
+
+    obj.save()
         .then((post)=>res.status(200).json({msg:"Data Saved Successfully",data:post}))
         .catch((err)=>res.status(400).json({Err:"Error Found i.e. "+err}))
 }

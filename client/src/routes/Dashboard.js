@@ -31,8 +31,8 @@ export default class Dashboard extends Component {
         {
             myPosts = info.map((value,index) => {
                 return(
-                    <div className="card w-100 mb-3">
-                        {/* <img src="..." class="card-img-top" alt="..."> */}
+                    <div className="card w-100 mb-3" key={index}>
+                        <img src={"http://localhost:3000/postImg/"+value.postPicture} className="card-img-top postImg" alt="..." />
                         <div className="card-body">
                             <h5 className="card-title">{value.postCaption}</h5>
                             <p className="card-text">{value.postLocation}</p>
