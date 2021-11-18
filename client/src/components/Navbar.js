@@ -27,7 +27,7 @@ export default function Navbar() {
                         </ul>
                         <form className="d-flex">
                             <Link className="btn btn-primary me-2" to='/'>Login</Link>
-                            <Link className="btn btn-warning" to='/'>Craete Account</Link>
+                            <Link className="btn btn-warning" to='/create-account'>Craete Account</Link>
                         </form>
                     </div>
                 </div>
