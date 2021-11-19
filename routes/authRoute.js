@@ -37,4 +37,22 @@ router.route("/create-account").post(upload.single('profilePic'),(req,res)=>{
 });
 
 
+router.post("/login",(req,res)=>{
+    const {emailId,Password} = req.body;
+    Auth.findOne({emailId})
+    .then((user)=>{
+        if(!user){
+            res.status(404).json({err:"User not found"});
+        }else{
+            if(Password === user.Password){
+                const usrInfo = {usrEmailId:user.EmailId};
+                res.status(200).json(usrInfo);
+            }else{
+                res.status(400).json({Err:"Password is incorrect"});
+            }
+        }
+    })
+    .catch((err)=>res.status(400).json({Err:"Error Found i.e. "+err}));
+})
+
 module.exports=router;
