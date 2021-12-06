@@ -1,31 +1,53 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import { Link } from 'react-router-dom';
+import propTypes from 'prop-types';
+
 import md5 from 'md5';
 import swal from 'sweetalert';
 
-export default function Login() {
+async function fetchData(credentials) {
+    return fetch("http://localhost:5000/api/login", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(credentials),
+    })
+    .then((data) => data.json());
+}
 
-    const [emailId,setEmailId] = useState();
-    const [Password,setPassword] = useState();
+export default function Login({ setToken }) {
 
-    const credentials={
-        emailId,Password
+    const [emailId, setEmailId] = useState();
+    const [Password, setPassword] = useState();
+
+    const credentials = {
+        emailId, Password
     }
 
-    const handleLogin = async (e) =>{
+    const handleLogin = async (e) => {
         e.preventDefault();
 
-        fetch("http://localhost:5000/api/login",{
-            method:"POST",
-            headers:{
-                "Content-Type":"application/json",
-            },
-            body:JSON.stringify(credentials),
-        })
-        .then((data)=>{
-            swal('Login Success for '+ data);
-        });
-    }
+        const token = await fetchData(credentials)
+
+        setToken(token);
+
+        if (!token || token.err) {
+            swal('Token not generated ' + token.err);
+        } else {
+            swal({
+                title: "Success",
+                text: "Logged in successfully",
+                icon: 'success',
+                button: 'Okay'
+            })
+            .then((res) => {
+                if (res) {
+                    window.location = "/dashboard";
+                }
+            });
+        }
+    };
 
     return (
         <div
@@ -35,7 +57,7 @@ export default function Login() {
             <div className="card shadow p-3 mb-5 bg-body rounded w-50">
                 <div className="card-header">
                     <h3>Login Here</h3>
-                    
+
                 </div>
                 <form className="card-body" onSubmit={handleLogin}>
                     <div className="mb-3">
@@ -45,7 +67,7 @@ export default function Login() {
                             type="email"
                             placeholder="yourname@example.com"
                             name="emailId"
-                            onChange={(e)=>{setEmailId(e.target.value)}}
+                            onChange={(e) => { setEmailId(e.target.value) }}
                             required
                         />
                     </div>
@@ -59,7 +81,7 @@ export default function Login() {
                             minLength="4"
                             maxLength="10"
                             name="Password"
-                            onChange={(e)=>{setPassword(md5(e.target.value))}}
+                            onChange={(e) => { setPassword(md5(e.target.value)) }}
                             required
                         />
                     </div>
@@ -75,3 +97,7 @@ export default function Login() {
         </div>
     );
 }
+
+Login.propTypes = {
+    setToken: propTypes.func.isRequired,
+};

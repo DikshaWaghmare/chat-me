@@ -33,7 +33,7 @@ router.route("/create-account").post(upload.single('profilePic'),(req,res)=>{
 
     obj.save()
         .then((user)=>res.status(200).json({msg:"Account created Successfully",data:user}))
-        .catch((err)=>res.status(400).json({Err:"Error Found i.e. "+err}))
+        .catch((err)=>res.status(400).json({err:"Error Found i.e. "+err}))
 });
 
 
@@ -45,14 +45,14 @@ router.post("/login",(req,res)=>{
             res.status(404).json({err:"User not found"});
         }else{
             if(Password === user.Password){
-                const usrInfo = {usrEmailId:user.EmailId};
+                const usrInfo = {usrEmailId:user.emailId};
                 res.status(200).json(usrInfo);
             }else{
-                res.status(400).json({Err:"Password is incorrect"});
+                res.status(400).json({err:"Password is incorrect"});
             }
         }
     })
-    .catch((err)=>res.status(400).json({Err:"Error Found i.e. "+err}));
+    .catch((err)=>res.status(400).json({err:"Error Found i.e. "+err}));
 })
 
 module.exports=router;
