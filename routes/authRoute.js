@@ -45,8 +45,7 @@ router.post("/login",(req,res)=>{
             res.status(404).json({err:"User not found"});
         }else{
             if(Password === user.Password){
-                const usrInfo = {usrEmailId:user.emailId};
-                res.status(200).json(usrInfo);
+                res.status(200).json(user.emailId);
             }else{
                 res.status(400).json({err:"Password is incorrect"});
             }

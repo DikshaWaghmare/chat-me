@@ -6,24 +6,40 @@ export default class Dashboard extends Component {
     constructor(){
         super();
         this.state={
-            userInfo:[]
+            postInfo:[],
+            userInfo:{}
         }
     }
 
     componentDidMount() {
+    const email =JSON.parse(localStorage.getItem('token'));
+
+
         axios
-            .get('http://localhost:5000/api/read')
+            .get('http://localhost:5000/api/read/'+email)
+            .then((res) => {
+                this.setState({postInfo:res.data});
+            })
+            .catch((err) => {
+                console.log('Err is ' + err)
+            });
+
+            axios
+            .get('http://localhost:5000/api/readUser/'+email)
             .then((res) => {
                 this.setState({userInfo:res.data});
             })
             .catch((err) => {
                 console.log('Err is ' + err)
-            })
+            });
+
+
+
     }
 
     render() {
         let myPosts;
-        var info = this.state.userInfo;
+        var info = this.state.userPost;
         if(!info){
             myPosts="<h2 className='text-danger'>Data Not Found</h2>";
         }
@@ -52,9 +68,9 @@ export default class Dashboard extends Component {
                     {/* Profile & folowers suggestions */}
                     <div className="col-md-4">
                         <div className="d-flex align-items-center">
-                            <img src={Logo} className="rounded-circle logo me-2" alt="..."/>
+                            <img src={"http://localhost:3000/postImg/"+usernfo.profilePic} className="rounded-circle logo me-2" alt="..."/>
                             <div>
-                                <p className='m-0'><b>Username</b></p>
+                                <p className='m-0'><b></b></p>
                                 <p className='m-0'>First Last</p>
                             </div>
                         </div>

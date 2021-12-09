@@ -25,13 +25,14 @@ let upload = multer({storage});
 // this route will post data to the db
 
 router.route("/insert").post(upload.single('postPicture'),(req,res)=>{
-    const{postCaption,postLocation} = req.body;
+    const{postCaption,postLocation,postBelongsTo} = req.body;
     const postPicture = req.file.filename;
 
     const pkg = {
         postPicture,
         postCaption,
         postLocation,
+        postBelongsTo
     };
 
     const obj = new Post(pkg);
@@ -41,7 +42,7 @@ router.route("/insert").post(upload.single('postPicture'),(req,res)=>{
         .catch((err)=>res.status(400).json({Err:"Error Found i.e. "+err}))
 });
 // this route will get all values from db
-router.get("/read",readPost)
+router.get("/read/:email",readPost)
 // this route will get specefic data from db using id from url prameters
 router.get("/read/:postId",readPostById)
 // this route will deleted data from a specefic post from db by using postid

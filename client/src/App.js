@@ -37,7 +37,7 @@ export default function App(){
                 <Route path="/dashboard" component={Dashboard} />
                 <Route path="/addPost" component={AddPost} />
                 
-                {token ? <Redirect from='/dashboard'/> : <Login /> }
+                {token ? <Redirect to='/dashboard' /> : <Login /> }
                 
             </Switch>
         </BrowserRouter>

@@ -31,7 +31,6 @@ const postSchema = new mongoose.Schema({
         type:String,
         required:true,
         trim:true,
-        default:'mrriteshjangir@gmail.com'
     }
 },{
     timestamps:true

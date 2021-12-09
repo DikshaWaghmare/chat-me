@@ -1,8 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import {FaPlusCircle} from 'react-icons/fa';
+import { FaPlusCircle } from 'react-icons/fa';
+
+import UserToken from "./UserToken";
+import Logout from './Logout';
 
 export default function Navbar() {
+    const { token } = UserToken();
     return (
         <div>
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -16,19 +20,38 @@ export default function Navbar() {
                             <li className="nav-item">
                                 <Link className="nav-link" to="/">Home</Link>
                             </li>
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/dashboard">Dashbaord</Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/addPost">
-                                    <FaPlusCircle /> Post
-                                </Link>
-                            </li>
+                            {
+                                !token || token.err ?
+                                    <>
+                                    </>
+                                    :
+                                    <>
+                                        <li className="nav-item">
+                                            <Link className="nav-link" to="/dashboard">Dashbaord</Link>
+                                        </li>
+                                        <li className="nav-item">
+                                            <Link className="nav-link" to="/addPost">
+                                                <FaPlusCircle /> Post
+                                            </Link>
+                                        </li>
+                                    </>
+                            }
+
                         </ul>
-                        <form className="d-flex">
-                            <Link className="btn btn-primary me-2" to='/login'>Login</Link>
-                            <Link className="btn btn-warning" to='/create-account'>Create Account</Link>
-                        </form>
+                        <div className="d-flex">
+                            {
+                                !token || token.err ?
+                                    <>
+                                        <Link className="btn btn-primary me-2" to='/login'>Login</Link>
+                                        <Link className="btn btn-warning" to='/create-account'>Create Account</Link>
+                                    </>
+                                    :
+                                    <>
+                                        <Logout />
+                                    </>
+                            }
+
+                        </div>
                     </div>
                 </div>
             </nav>

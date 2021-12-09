@@ -23,15 +23,19 @@ export default class AddPost extends Component {
             swal("File should be under 1 MB only");
         }
     }
-
+    
     savePost = (e) => {
         e.preventDefault();
+        const postBelongsTo =JSON.parse(localStorage.getItem('token'));
+        
+        console.log(postBelongsTo);
 
         const FD = new FormData();
 
         FD.append('postCaption',this.state.postCaption);
         FD.append('postLocation',this.state.postLocation);
         FD.append('postPicture',this.state.postPicture);
+        FD.append('postBelongsTo',postBelongsTo);
 
         axios
             .post('http://localhost:5000/api/insert', FD)
