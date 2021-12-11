@@ -18,7 +18,7 @@ exports.insertPost=(req,res)=>{
 }
 
 exports.readPost=(req,res)=>{
-    Post.find({postBelongsTo : req.params.email}).sort({createdAt:-1})
+    Post.find().sort({createdAt:-1})
         .then((data)=>res.status(200).json(data))
         .catch((err)=>res.status(400).json({Err:"Error Found i.e. "+err}))
 }

@@ -3,6 +3,9 @@ var express=require("express");
 var router=express.Router();
 
 const Auth = require('../models/authModel');
+
+const {login,readUser,allUser} = require('../controllers/authController')
+
 // File Uploading
 const multer = require('multer');
 const {v4 : uuidv4} = require('uuid');
@@ -37,21 +40,10 @@ router.route("/create-account").post(upload.single('profilePic'),(req,res)=>{
 });
 
 
-router.post("/login",(req,res)=>{
-    const {emailId,Password} = req.body;
-    Auth.findOne({emailId})
-    .then((user)=>{
-        if(!user){
-            res.status(404).json({err:"User not found"});
-        }else{
-            if(Password === user.Password){
-                res.status(200).json(user.emailId);
-            }else{
-                res.status(400).json({err:"Password is incorrect"});
-            }
-        }
-    })
-    .catch((err)=>res.status(400).json({err:"Error Found i.e. "+err}));
-})
+
+
+router.post('/login',login);
+router.get('/readUser/:email',readUser);
+router.get('/allUser',allUser);
 
 module.exports=router;
