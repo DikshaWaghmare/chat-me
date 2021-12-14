@@ -1,4 +1,5 @@
 import swal from 'sweetalert';
+import { FaPowerOff } from 'react-icons/fa';
 export default function Logout(){
 
     function takeMeOut(){
@@ -26,7 +27,7 @@ export default function Logout(){
 
     return(
         <>
-            <button className="btn btn-danger" onClick={takeMeOut}>Logout</button>
+            <button className="btn btn-danger" onClick={takeMeOut}> <FaPowerOff/></button>
         </>
     )
 }

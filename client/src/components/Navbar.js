@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { FaPlusCircle } from 'react-icons/fa';
+import { FaCog, FaPaperPlane, FaPlusCircle, FaPlusSquare, FaPowerOff, FaTachometerAlt, FaUser } from 'react-icons/fa';
 
 import UserToken from "./UserToken";
 import Logout from './Logout';
@@ -20,23 +20,6 @@ export default function Navbar() {
                             <li className="nav-item">
                                 <Link className="nav-link" to="/">Home</Link>
                             </li>
-                            {
-                                !token || token.err ?
-                                    <>
-                                    </>
-                                    :
-                                    <>
-                                        <li className="nav-item">
-                                            <Link className="nav-link" to="/dashboard">Dashbaord</Link>
-                                        </li>
-                                        <li className="nav-item">
-                                            <Link className="nav-link" to="/addPost">
-                                                <FaPlusCircle /> Post
-                                            </Link>
-                                        </li>
-                                    </>
-                            }
-
                         </ul>
                         <div className="d-flex">
                             {
@@ -47,6 +30,20 @@ export default function Navbar() {
                                     </>
                                     :
                                     <>
+                                        <button className='btn btn-primary me-2'><FaPaperPlane /></button>
+                                        <div class="dropdown me-2">
+                                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                              <FaUser/>
+                                            </button>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                                <li><Link className="dropdown-item" to="/dashboard">
+                                                    <FaTachometerAlt/>  Dashbaord</Link></li>
+                                                <li><Link className="dropdown-item" to="/addPost">
+                                                    <FaPlusSquare/> Add Post</Link></li>
+                                                <li><Link className="dropdown-item" to="/dashboard">
+                                                    <FaCog /> Setting</Link></li>
+                                            </ul>
+                                        </div>
                                         <Logout />
                                     </>
                             }
